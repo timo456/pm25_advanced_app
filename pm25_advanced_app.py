@@ -12,7 +12,7 @@ st.title("🌫️ 空氣品質辨識系統（進階版）")
 
 @st.cache_data
 def load_model():
-    return joblib.load("air_quality_model.pkl")
+    return joblib.load("air_quality_model_cloud_ready.pkl")
 
 def analyze_image(image):
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
