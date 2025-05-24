@@ -4,3 +4,6 @@ joblib
 pandas
 numpy
 matplotlib
+cv2
+sqlite3
+datetime
