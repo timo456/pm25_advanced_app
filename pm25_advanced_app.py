@@ -174,23 +174,30 @@ with tab2:
         counts = df_result["PM2.5狀態"].value_counts()
         fig, ax = plt.subplots()
 
-        # 畫圖
-        ax.bar(counts.index, counts.values, color=["red", "green", "blue"])
+        # 定義每一類的顏色對應
+        color_map = {
+            "超標": "red",
+            "未超標": "green",
+            "無法判斷": "blue"
+        }
 
-        # 中文標題與座標軸
+        # 依照 counts.index（即狀態名稱）取得對應顏色
+        bar_colors = [color_map.get(label, "gray") for label in counts.index]
+        
+        # 畫圖
+        fig, ax = plt.subplots()
+        ax.bar(counts.index, counts.values, color=bar_colors)
+        
+        # 加上中文字型
         ax.set_title("PM2.5 預測統計", fontproperties=my_font)
         ax.set_ylabel("數量", fontproperties=my_font)
         ax.set_xlabel("狀態", fontproperties=my_font)
-        ax.tick_params(axis='x', labelsize=12)
-        ax.tick_params(axis='y', labelsize=12)
-
-        # 每個刻度也指定字型（重要！）
+        
         for label in ax.get_xticklabels():
             label.set_fontproperties(my_font)
         for label in ax.get_yticklabels():
             label.set_fontproperties(my_font)
-
-        # 顯示圖表
+        
         st.pyplot(fig)
 
         csv = df_result.drop(columns=["圖片縮圖"]).to_csv(index=False).encode("utf-8-sig")
