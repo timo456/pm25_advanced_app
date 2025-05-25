@@ -9,7 +9,7 @@ from fpdf import FPDF
 import sqlite3
 from datetime import datetime, timedelta
 
-plt.rcParams['font.family'] = 'Microsoft JhengHei'
+plt.rcParams['font.family'] = 'SimHei'  # 黑體
 plt.rcParams['axes.unicode_minus'] = False
 
 st.set_page_config(page_title="PM2.5 預測系統（整合版）", layout="wide")
