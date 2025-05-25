@@ -175,7 +175,7 @@ with tab2:
         fig, ax = plt.subplots()
 
         # 畫圖
-        ax.bar(counts.index, counts.values, color=["green", "red", "blue"])
+        ax.bar(counts.index, counts.values, color=["red", "green", "blue"])
 
         # 中文標題與座標軸
         ax.set_title("PM2.5 預測統計", fontproperties=my_font)
