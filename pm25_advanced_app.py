@@ -149,7 +149,7 @@ with tab2:
         for row in results:
             col1, col2 = st.columns([1, 3])
             with col1:
-                st.image(row["圖片縮圖"], use_column_width=True)
+                st.image(row["圖片縮圖"], use_container_width=True)
             with col2:
                 st.markdown(f"**檔名**: {row['檔名']}")
                 st.markdown(f"- 藍天比例：{row['藍天比例(%)']}%")
