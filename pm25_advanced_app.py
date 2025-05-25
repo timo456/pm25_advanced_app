@@ -1,5 +1,6 @@
 # ✅ Unified PM2.5 Detection App with Rule-Based Logic
 import streamlit as st
+st.set_page_config(page_title="PM2.5 預測系統（整合版）", layout="wide")
 import pandas as pd
 import numpy as np
 import cv2
@@ -11,12 +12,11 @@ from datetime import datetime, timedelta
 import matplotlib.font_manager as fm
 
 # 設定 matplotlib 使用中文字型
-font_path = "NotoSansCJKtc-Black.otf"
+font_path = "fonts/NotoSerifTC-Regular.ttf"
 my_font = fm.FontProperties(fname=font_path)
-plt.rcParams['font.family'] = my_font.get_name()
-plt.rcParams['axes.unicode_minus'] = False
+plt.rcParams["axes.unicode_minus"] = False  # 這可以保留
+st.text(f"✅ 目前載入的字型為: {my_font.get_name()}")
 
-st.set_page_config(page_title="PM2.5 預測系統（整合版）", layout="wide")
 st.title("🌫️ PM2.5 空氣品質多功能預測系統")
 
 def analyze_image(image):
@@ -153,6 +153,7 @@ with tab2:
         for row in results:
             col1, col2 = st.columns([1, 3])
             with col1:
+                # 改成
                 st.image(row["圖片縮圖"], use_container_width=True)
             with col2:
                 st.markdown(f"**檔名**: {row['檔名']}")
@@ -172,9 +173,24 @@ with tab2:
         st.subheader("📊 狀態分佈")
         counts = df_result["PM2.5狀態"].value_counts()
         fig, ax = plt.subplots()
+
+        # 畫圖
         ax.bar(counts.index, counts.values, color=["green", "red", "blue"])
-        ax.set_ylabel("數量")
-        ax.set_title("PM2.5 預測統計")
+
+        # 中文標題與座標軸
+        ax.set_title("PM2.5 預測統計", fontproperties=my_font)
+        ax.set_ylabel("數量", fontproperties=my_font)
+        ax.set_xlabel("狀態", fontproperties=my_font)
+        ax.tick_params(axis='x', labelsize=12)
+        ax.tick_params(axis='y', labelsize=12)
+
+        # 每個刻度也指定字型（重要！）
+        for label in ax.get_xticklabels():
+            label.set_fontproperties(my_font)
+        for label in ax.get_yticklabels():
+            label.set_fontproperties(my_font)
+
+        # 顯示圖表
         st.pyplot(fig)
 
         csv = df_result.drop(columns=["圖片縮圖"]).to_csv(index=False).encode("utf-8-sig")
