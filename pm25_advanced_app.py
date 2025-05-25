@@ -9,7 +9,7 @@ from fpdf import FPDF
 import sqlite3
 from datetime import datetime, timedelta
 
-plt.rcParams['font.family'] = ['Noto Sans CJK TC', 'sans-serif']
+plt.rcParams['font.family'] = 'Microsoft JhengHei'  # 微軟正黑體
 plt.rcParams['axes.unicode_minus'] = False
 
 st.set_page_config(page_title="PM2.5 預測系統（整合版）", layout="wide")
@@ -169,8 +169,8 @@ with tab2:
         counts = df_result["PM2.5狀態"].value_counts()
         fig, ax = plt.subplots()
         ax.bar(counts.index, counts.values, color=["green", "red", "blue"])
-        ax.set_ylabel("Count")
-        ax.set_title("PM2.5 Prediction Distribution")
+        ax.set_ylabel("數量")
+        ax.set_title("PM2.5 預測統計")
         st.pyplot(fig)
 
         csv = df_result.drop(columns=["圖片縮圖"]).to_csv(index=False).encode("utf-8-sig")
