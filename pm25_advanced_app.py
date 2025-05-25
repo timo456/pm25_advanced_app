@@ -169,8 +169,8 @@ with tab2:
         counts = df_result["PM2.5狀態"].value_counts()
         fig, ax = plt.subplots()
         ax.bar(counts.index, counts.values, color=["green", "red", "blue"])
-        ax.set_ylabel("數量")
-        ax.set_title("PM2.5 預測分佈")
+        ax.set_ylabel("Count")
+        ax.set_title("PM2.5 Prediction Distribution")
         st.pyplot(fig)
 
         csv = df_result.drop(columns=["圖片縮圖"]).to_csv(index=False).encode("utf-8-sig")
