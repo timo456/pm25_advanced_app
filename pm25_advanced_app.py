@@ -11,10 +11,10 @@ from datetime import datetime, timedelta
 import matplotlib.font_manager as fm
 
 # 設定 matplotlib 使用中文字型
+# 使用自己上傳的中文字型
 font_path = "NotoSansCJKtc-Black.otf"
 my_font = fm.FontProperties(fname=font_path)
 plt.rcParams['font.family'] = my_font.get_name()
-
 plt.rcParams['axes.unicode_minus'] = False
 
 st.set_page_config(page_title="PM2.5 預測系統（整合版）", layout="wide")
