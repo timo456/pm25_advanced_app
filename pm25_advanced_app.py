@@ -29,10 +29,14 @@ def analyze_image(image):
     brightness = np.mean(gray)
     return blue_ratio * 100, lap_mean, brightness
 
-def rule_based_prediction(blue, lap, brightness):
+model = joblib.load("pm25_model.pkl")
+
+def ml_model_prediction(blue, lap, brightness):
+    features = [[blue, lap, brightness]]
+    label = model.predict(features)[0]
     if blue < 0.5 and lap < 10 and brightness < 100:
         return "天氣不明", "無法判斷"
-    elif lap < 10:
+    if label == 1:
         return "模糊影像", "超標"
     else:
         return "清晰影像", "未超標"
@@ -135,7 +139,7 @@ with tab2:
             file_bytes = np.frombuffer(file.read(), np.uint8)
             image = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
             blue, lap, brightness = analyze_image(image)
-            result, pm25 = rule_based_prediction(blue, lap, brightness)
+            result, pm25 = ml_model_prediction(blue, lap, brightness)
             thumbnail = cv2.resize(image, (120, 90))
             thumbnail = cv2.cvtColor(thumbnail, cv2.COLOR_BGR2RGB)
             results.append({
