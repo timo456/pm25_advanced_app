@@ -122,7 +122,13 @@ with tab2:
             st.markdown(f"- Sobel 邊緣強度：{sobel:.2f}")
             st.markdown(f"- 平均亮度：{brightness:.2f}")
             st.info(f"🔍 判斷：{result}")
-            st.success("PM2.5 狀態：未超標" if pm25 == "未超標" else "PM2.5 狀態：超標" if pm25 == "超標" else "PM2.5 狀態：無法判斷")
+            st.info(f"🔍 判斷：{result}")
+            if pm25 == "未超標":
+                st.success("✅ PM2.5 狀態：未超標")
+            elif pm25 == "超標":
+                st.error("❌ PM2.5 狀態：超標")
+            else:
+                st.info("⚠️ PM2.5 狀態：無法判斷")
             results.append({
                 "檔名": file.name,
                 "藍天比例(%)": blue,
