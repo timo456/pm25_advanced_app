@@ -26,8 +26,16 @@ def analyze_image(image):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     lap = cv2.Laplacian(gray, cv2.CV_64F)
     lap_mean = np.mean(np.abs(lap))
+    lap_std = np.std(lap)
+
+    # Sobel X + Y
+    sobelx = cv2.Sobel(gray, cv2.CV_64F, 1, 0, ksize=3)
+    sobely = cv2.Sobel(gray, cv2.CV_64F, 0, 1, ksize=3)
+    sobel_mag = np.sqrt(sobelx**2 + sobely**2)
+    sobel_mean = np.mean(sobel_mag)
+
     brightness = np.mean(gray)
-    return blue_ratio * 100, lap_mean, brightness
+    return blue_ratio * 100, lap_mean, lap_std, sobel_mean, brightness
 
 model = joblib.load("pm25_model.pkl")
 
