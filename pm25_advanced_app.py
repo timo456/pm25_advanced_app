@@ -159,10 +159,10 @@ with tab2:
         ax.set_title("PM2.5 預測統計")
         st.pyplot(fig)
 
-            pdf_path = "PM2.5_報告.pdf"
-            generate_pdf(results, pdf_path)
-            with open(pdf_path, "rb") as f:
-                st.download_button("🧾 下載 PDF 報告", f.read(), file_name=pdf_path, mime="application/pdf")
+        pdf_path = "PM2.5_報告.pdf"
+        generate_pdf(results, pdf_path)
+        with open(pdf_path, "rb") as f:
+            st.download_button("🧾 下載 PDF 報告", f.read(), file_name=pdf_path, mime="application/pdf")
 
 # 🧾 模型說明 or 歷史查詢功能可加在 tab3
 with tab3:
