@@ -155,8 +155,8 @@ with tab2:
 
         fig, ax = plt.subplots()
         ax.bar(counts.index, counts.values, color=bar_colors)
-        ax.set_ylabel("數量")
-        ax.set_title("PM2.5 預測統計")
+        ax.set_ylabel("數量",fontproperties=my_font)
+        ax.set_title("PM2.5 預測統計",fontproperties=my_font)
         st.pyplot(fig)
 
         pdf_path = "PM2.5_報告.pdf"
