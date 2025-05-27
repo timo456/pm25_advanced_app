@@ -157,6 +157,7 @@ with tab2:
         ax.bar(counts.index, counts.values, color=bar_colors)
         ax.set_ylabel("數量",fontproperties=my_font)
         ax.set_title("PM2.5 預測統計",fontproperties=my_font)
+        ax.set_xticklabels(counts.index, fontproperties=my_font)
         st.pyplot(fig)
 
         pdf_path = "PM2.5_報告.pdf"
